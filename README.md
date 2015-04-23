@@ -54,18 +54,17 @@ We can also initialize a Record from an existing composite map.
 ```
 
 ### Set and Get
-We can insert a value into the record with Set.
+We can insert a value into the record with Set by passing
+the desired path to the value.
 ```go
 	r.Set("1.3", 13)
 ```
-This actually maps "3" to 13 in the map keyed to "1".
 The value 13 now resides as a value in a subsubmap of the record.
 We can extract it with Get, although we must assert types.
 ```go
 	x, _ := r.Get("1.3")
 	fmt.Println("Fetched the value 13:", x.(int) == 13) // true
 ```
-This actually maps "3" to 13 in the map keyed to "1".
 
 Get's second return value indicates whether the path exists.
 ```go
