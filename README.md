@@ -3,7 +3,7 @@ A simple Record structure that simplifies access to values in composite maps.
 
 ## Usage Examples
 
-The code for these examples is in the ```examples/``` dir.  We first import
+The code for these examples is in the [examples](examples/) dir.  We first import
 the package and define a function that records a sample raw record
 such as might be returned by a database SDK.
 
