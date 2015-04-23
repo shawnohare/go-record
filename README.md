@@ -55,7 +55,8 @@ We can also initialize a Record from an existing composite map.
 
 ### Set and Get
 We can insert a value into the record with Set by passing
-the desired path to the value.
+the desired path to the value.  A path is always a string
+of keys separated by a period.
 ```go
 	r.Set("1.3", 13)
 ```
