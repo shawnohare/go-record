@@ -37,8 +37,8 @@ func Init(m map[string]interface{}) *Record {
 	return r
 }
 
-// Data returns the underlying map-of-maps data structure a Record
-func (r *Record) Data() map[string]interface{} {
+// AsMap returns the underlying map-of-maps data structure a Record
+func (r *Record) AsMap() map[string]interface{} {
 	return r.data
 }
 
@@ -55,13 +55,13 @@ func (r *Record) Set(path string, x interface{}) {
 }
 
 // SubRecord returns a new Record that only includes the specified paths.
-func (r *Record) SubRecord(paths []string) *Record {
-	data := subRecord(r.data, paths)
+func (r *Record) Filter(paths []string) *Record {
+	data := filter(r.data, paths)
 	return Init(data)
 }
 
 // SubRecord produces a new nested-map structure from the input
-func subRecord(m map[string]interface{}, paths []string) map[string]interface{} {
+func filter(m map[string]interface{}, paths []string) map[string]interface{} {
 	// Create empty composite map.
 	s := make(map[string]interface{})
 	for _, pathStr := range paths {

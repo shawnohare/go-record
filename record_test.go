@@ -75,7 +75,7 @@ func TestSet(t *testing.T) {
 	// Insert data into an element that already exists.
 	r := Init(makeExample())
 	r.Set("1.3", 13)
-	s := r.SubRecord([]string{"1"}).Data()
+	s := r.Filter([]string{"1"}).AsMap()
 	expected := map[string]interface{}{
 		"1": map[string]interface{}{
 			"1": 11,
@@ -95,11 +95,11 @@ func TestSet(t *testing.T) {
 	r.Set("1.1", 11)
 	r.Set("1.2", 12)
 	r.Set("1.3", 13)
-	assert.Equal(t, expected, r.Data())
+	assert.Equal(t, expected, r.AsMap())
 
 }
 
-func TestSubRecord(t *testing.T) {
+func TestFilter(t *testing.T) {
 	var testCases = []struct {
 		example    map[string]interface{}
 		paths      []string
@@ -110,7 +110,7 @@ func TestSubRecord(t *testing.T) {
 			[]string{"1.2", "3"},
 			subexample,
 		},
-		// Test whether SubRecord ignores invalid paths.
+		// Test whether Filter ignores invalid paths.
 		{
 			makeExample(),
 			[]string{"1.2", "3", "4.1.2.3"},
@@ -121,13 +121,13 @@ func TestSubRecord(t *testing.T) {
 	for i, tt := range testCases {
 		t.Log("Case:", i)
 		r := Init(tt.example)
-		sub2 := r.SubRecord(tt.paths).Data()
+		sub2 := r.Filter(tt.paths).AsMap()
 		assert.True(t, reflect.DeepEqual(tt.subexample, sub2))
 	}
 
 	// Test passing all paths to some leafs vs path to parent.
 	r := Init(makeExample())
-	sParent := r.SubRecord([]string{"1"})
-	sAll := r.SubRecord([]string{"1.1", "1.2"})
+	sParent := r.Filter([]string{"1"})
+	sAll := r.Filter([]string{"1.1", "1.2"})
 	assert.Equal(t, sParent, sAll)
 }
