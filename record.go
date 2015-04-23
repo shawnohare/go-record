@@ -27,7 +27,7 @@ type Record struct {
 
 // New creates a pointer to a Record which is ready to have values set.
 func New() *Record {
-	return new(Record)
+	return &Record{make(map[string]interface{})}
 }
 
 // Init creates a pointer to a Record whose underlying data is the input.

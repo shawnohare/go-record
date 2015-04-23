@@ -72,6 +72,7 @@ func TestGet(t *testing.T) {
 }
 
 func TestSet(t *testing.T) {
+	// Insert data into an element that already exists.
 	r := Init(makeExample())
 	r.Set("1.3", 13)
 	s := r.SubRecord([]string{"1"}).Data()
@@ -88,6 +89,13 @@ func TestSet(t *testing.T) {
 	example := makeExample()
 	set(example, nil, false)
 	assert.Equal(t, example, makeExample())
+
+	// Test inserting data into a new instance.
+	r = New()
+	r.Set("1.1", 11)
+	r.Set("1.2", 12)
+	r.Set("1.3", 13)
+	assert.Equal(t, expected, r.Data())
 
 }
 
