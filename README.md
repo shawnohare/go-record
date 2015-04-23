@@ -93,8 +93,8 @@ just pass the appropriate path.
 ### Filter
 Similarly, we can retrieve a filtered version of the record
 by passing the desired paths. If we pass a path to a non-leaf node,
-we obtain all values below the path node as well. Filter
-silently ignores  non-existent paths.
+we obtain all values below the node as well. Filter
+silently ignores non-existent paths.
 ```go
 	paths := []string{"1.1", "3.1", "badPath"}
 	var filtered *record.Record
