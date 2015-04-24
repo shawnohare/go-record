@@ -1,5 +1,5 @@
 # go-record
-A simple Record structure that simplifies access to values in composite maps.
+A lightweight Record structure that simplifies access to values in composite (nested) maps.
 
 ## Usage Examples
 
