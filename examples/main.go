@@ -76,4 +76,10 @@ func main() {
 	_, prs = filtered.Get("3.1.1.1") // Access the leaf as expected.
 	fmt.Println("Value exists:", prs)
 
+	var filteredMap map[string]interface{}
+	filteredMap = record.FilterMap(makeExample(), paths)
+	fmt.Println("Filtered map:", filteredMap)
+	// Equivalent to:
+	filteredMap = record.Init(makeExample()).Filter(paths).AsMap()
+	fmt.Println("Filtered map:", filteredMap)
 }
