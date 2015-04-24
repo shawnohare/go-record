@@ -16,7 +16,7 @@ import (
 	"github.com/shawnohare/go-record"
 )
 
-//
+// Make a new composite map example.
 func makeExample() map[string]interface{} {
 	var example = map[string]interface{}{
 		"1": map[string]interface{}{
