@@ -61,20 +61,15 @@ of keys separated by a period.
 	r.Set("1.3", 13)
 ```
 The value 13 now resides as a value in a subsubmap of the record.
-We can extract it with Get, although we must assert types.
+We can extract it with Get, although we must assert types.  The
+second return value is a boolean indicated whether the path exists.
 ```go
-	x, _ := r.Get("1.3")
-	fmt.Println("Fetched the value 13:", x.(int) == 13) // true
-```
-
-Get's second return value indicates whether the path exists.
-```go
-	_, prs := r.Get("1.4")
-	if !prs {
-		fmt.Println("The path \"1.4\" does not exist.")
+	x, prs := r.Get("1.3")
+	if prs {
+		x.(int) == 13 // true
 	}
-
 ```
+
 If we wish to obtain a nested map instead of a leaf, we
 just pass the appropriate path.
 ```go
@@ -86,9 +81,7 @@ just pass the appropriate path.
  AsMap allows access to the underlying composite map.
 ```go
 	var d map[string]interface{}
-
 	d = r.AsMap()
-
 	fmt.Println("The underlying composite map:", d)
 ```
 
@@ -104,9 +97,7 @@ silently ignores non-existent paths.
 	filtered = r.Filter(paths)
 
 	fmt.Println("Filtered record:", filtered)
-
 	_, prs = filtered.Get("3.1.1.1") // Access the leaf as expected.
-
 	fmt.Println("Value exists:", prs)
 }
 ```
@@ -119,7 +110,9 @@ wrapper for the internal filter function.
   var filteredMap map[string]interface{}
   filteredMap = record.FilterMap(makeExample(), paths)
   fmt.Println("Filtered map:", filteredMap)
+  
   // Equivalent to: 
+  
   filteredMap = record.Init(makeExample()).Filter(paths).AsMap()
   fmt.Println("Filtered map:", filteredMap)
 ```
