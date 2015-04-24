@@ -43,7 +43,6 @@ func main() {
 
 	// We can insert a value into the record with Set.
 	r.Set("1.3", 13)
-	// This actually maps "3" to 13 in the map keyed to "1".
 
 	// The value 13 now resides as a value in a subsubmap of the record.
 	// We can extract it with Get, although we must assert types.
@@ -68,7 +67,7 @@ func main() {
 
 	// Similarly, we can retrieve a filtered version of the record
 	// by passing the desired paths. If we pass a path to a non-leaf node,
-	// we obtain all values below the path node as well. Filter
+	// we obtain all values below the node as well. Filter
 	// silently ignores  non-existent paths.
 	paths := []string{"1.1", "3.1", "badPath"}
 	var filtered *record.Record
