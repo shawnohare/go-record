@@ -86,7 +86,9 @@ just pass the appropriate path.
  AsMap allows access to the underlying composite map.
 ```go
 	var d map[string]interface{}
+
 	d = r.AsMap()
+
 	fmt.Println("The underlying composite map:", d)
 ```
 
@@ -98,9 +100,26 @@ silently ignores non-existent paths.
 ```go
 	paths := []string{"1.1", "3.1", "badPath"}
 	var filtered *record.Record
+
 	filtered = r.Filter(paths)
+
 	fmt.Println("Filtered record:", filtered)
+
 	_, prs = filtered.Get("3.1.1.1") // Access the leaf as expected.
+
 	fmt.Println("Value exists:", prs)
 }
+```
+
+### FilterMap
+FilterMap is a convenience function that performs filtering on raw
+composite maps rather than Record objects.  It's just an exported
+wrapper for the internal filter function.
+```go
+  var filteredMap map[string]interface{}
+  filteredMap = record.FilterMap(makeExample(), paths)
+  fmt.Println("Filtered map:", filteredMap)
+  // Equivalent to: 
+  filteredMap = record.Init(makeExample()).Filter(paths).AsMap()
+  fmt.Println("Filtered map:", filteredMap)
 ```
