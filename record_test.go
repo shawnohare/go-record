@@ -122,7 +122,11 @@ func TestFilter(t *testing.T) {
 		t.Log("Case:", i)
 		r := Init(tt.example)
 		sub2 := r.Filter(tt.paths).AsMap()
+		sub3 := FilterMap(tt.example, tt.paths)
+		// Test that the Filter method returns the expected object.
 		assert.True(t, reflect.DeepEqual(tt.subexample, sub2))
+		// Test that the FilterMap funct returns the expected object.
+		assert.True(t, reflect.DeepEqual(tt.subexample, sub3))
 	}
 
 	// Test passing all paths to some leafs vs path to parent.

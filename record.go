@@ -54,10 +54,16 @@ func (r *Record) Set(path string, x interface{}) {
 	set(r.data, p, x)
 }
 
-// SubRecord returns a new Record that only includes the specified paths.
+// Filter returns a new Record that only includes the specified paths.
 func (r *Record) Filter(paths []string) *Record {
 	data := filter(r.data, paths)
 	return Init(data)
+}
+
+// FilterMap returns a new composite map filtered to include only values
+// (and nested maps) specified by the paths array.
+func FilterMap(m map[string]interface{}, paths []string) map[string]interface{} {
+	return filter(m, paths)
 }
 
 // SubRecord produces a new nested-map structure from the input
